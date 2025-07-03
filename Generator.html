@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<title>i love u dyk</title>
+<style>
+  body { font-family: Arial, sans-serif; max-width: 600px; margin: 30px auto; }
+  label { display: block; margin-top: 15px; font-weight: bold; }
+  input[type=text], textarea { width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box; }
+  button { margin-top: 20px; padding: 10px 20px; font-size: 16px; }
+</style>
+</head>
+<body>
+
+<h2>Генератор описания для FunPay для гениев</h2>
+
+<label for="startOrFarmed">Стартовый или прокачанный (одно из двух):</label>
+<input type="text" id="startOrFarmed" placeholder="СТАРТОВЫЙ или ПРОКАЧАННЫЙ" />
+
+<label for="charactersShort">Персонажи (для краткого описания):</label>
+<input type="text" id="charactersShort" placeholder="Например: 2" />
+
+<label for="spinCountShort">Кол-во круток (для краткого описания):</label>
+<input type="text" id="spinCountShort" placeholder="Например: 150" />
+
+<hr>
+
+<label for="spinCount">💕 Кол-во круток:</label>
+<input type="text" id="spinCount" />
+
+<label for="characters">🖤 Персонажей:</label>
+<input type="text" id="characters" />
+
+<label for="server">💞 Сервер:</label>
+<input type="text" id="server" />
+
+<label for="adventureRank">💦 Ранг приключений:</label>
+<input type="text" id="adventureRank" />
+
+<label for="legendaryWeapons">🍿 Легендарных оружий:</label>
+<input type="text" id="legendaryWeapons" />
+
+<label for="constellations">💕 Созвездий на легендарках:</label>
+<input type="text" id="constellations" />
+
+<label for="spiralAbyss">🖤 Витая Бездна:</label>
+<input type="text" id="spiralAbyss" />
+
+<label for="achievements">💦 Достижений:</label>
+<input type="text" id="achievements" />
+
+<label for="login">Логин (почта):</label>
+<input type="text" id="login" />
+
+<label for="mailPassword">Пароль от почты:</label>
+<input type="text" id="mailPassword" />
+
+<label for="accountPassword">Пароль от аккаунта:</label>
+<input type="text" id="accountPassword" />
+
+<button onclick="generateAndDownload()">Сгенерировать и скачать</button>
+
+<script>
+function generateAndDownload() {
+  const startOrFarmed = document.getElementById('startOrFarmed').value.trim().toUpperCase();
+  const charactersShort = document.getElementById('charactersShort').value.trim().toUpperCase();
+  const spinCountShort = document.getElementById('spinCountShort').value.trim().toUpperCase();
+
+  if (!startOrFarmed || !charactersShort || !spinCountShort) {
+    alert('Пожалуйста, заполните все поля краткого описания!');
+    return;
+  }
+
+  const shortDesc = `⚡АВТОВЫДАЧА💧${startOrFarmed}💠${charactersShort}💫КРУТОК: ${spinCountShort}⭐ ПЕРСОНАЖИ И ОРУЖИЯ💫💫СКРИНЫ💫`;
+
+  const spinCount = document.getElementById('spinCount').value.trim().toUpperCase();
+  const characters = document.getElementById('characters').value.trim().toUpperCase();
+  const server = document.getElementById('server').value.trim().toUpperCase();
+  const adventureRank = document.getElementById('adventureRank').value.trim().toUpperCase();
+  const legendaryWeapons = document.getElementById('legendaryWeapons').value.trim().toUpperCase();
+  const constellations = document.getElementById('constellations').value.trim().toUpperCase();
+  const spiralAbyss = document.getElementById('spiralAbyss').value.trim().toUpperCase();
+  const achievements = document.getElementById('achievements').value.trim().toUpperCase();
+
+  const login = document.getElementById('login').value.trim();
+  const mailPassword = document.getElementById('mailPassword').value.trim();
+  const accountPassword = document.getElementById('accountPassword').value.trim();
+
+  if(!login) {
+    alert('Введите логин (почту)!');
+    return;
+  }
+
+  const fileName = login.length >= 3 ? login.substring(0,3) + ".txt" : "output.txt";
+
+  const text = 
+`КРАТКОЕ ОПИСАНИЕ (СТАВЬ В 1 ВКЛАДКУ): 
+"${shortDesc}"
+
+ПОДРОБНОЕ ОПИСАНИЕ (СТАВЬ ВО 2 ВКЛАДКУ):
+
+💕Кол-во круток: ${spinCount}
+🖤Персонажей: ${characters}
+💞Сервер: ${server}
+💦Ранг приключений: ${adventureRank}
+🍿Легендарных оружий: ${legendaryWeapons}
+💕Созвездий на легендарках: ${constellations}
+🖤Витая Бездна: ${spiralAbyss}
+💦Достижений: ${achievements}
+
+📧- Аккаунт отдается вместе с доступом к родной почте!
+
+🎶💖👌Инструкции по оформлению заказа👇
+Аккаунт абсолютно чистый и вы можете без опасений делать его личным, аккаунт фармился без ПО и прочего, ручная работа и высшее качество!🥳
+
+🍑Как проходит покупка:
+🌸1 Вы оплачиваете товар
+🌸2 После выдачи заходите на аккаунт и проверяете
+🌸3 Вы подтверждаете заказ если все хорошо
+🌸4 Вы можете оставить отзыв, перейдя в раздел «Покупки», отзывы очень важны для меня!
+
+🔥💯Я не несу ответственности за действия, которые вы совершили на своем аккаунте после покупки!
+
+ДАННЫЕ (СТАВЬ В СООБЩЕНИЕ ПОСЛЕ ОПЛАТЫ): ${login};${mailPassword};${accountPassword}
+`;
+
+  const blob = new Blob([text], {type: 'text/plain;charset=utf-8'});
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = fileName;
+  link.click();
+  URL.revokeObjectURL(link.href);
+}
+</script>
+
+</body>
+</html>
